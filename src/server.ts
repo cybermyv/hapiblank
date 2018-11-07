@@ -2,6 +2,8 @@ import * as Hapi from "hapi";
 import * as Boom from "boom";
 import { IServerConfigurations } from "./configurations/index";
 
+import * as Temp from "./api/Temp";
+
 export function init(configs: IServerConfigurations) {
     try {
         const port = process.env.PORT || configs.port;
@@ -19,7 +21,8 @@ export function init(configs: IServerConfigurations) {
         if (configs.routePrefix) {
             server.realm.modifiers.route.prefix = configs.routePrefix;
         }
-        console.log("Register Routes - no route");
+        console.log("Register Routes");
+        Temp.init(server, configs);
         return server;
 
     } catch (err) {
