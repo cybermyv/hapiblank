@@ -3,6 +3,7 @@
     "port": 5000,
     "jwtSecret": "random-secret-password",
     "jwtExpiration": "1h",
-    "routePrefix": ""
+    "routePrefix": "",
+    "plugins": [ "swagger" ]
   }
 }
