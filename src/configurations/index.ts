@@ -1,6 +1,13 @@
 import * as nconf from "nconf";
 import * as path from "path";
 
+/* потом надо переделать определение базы данных, а то она некрасиво лежит в корне
+
+const path = require('path')
+const dbPath = path.resolve(__dirname, 'todo.db')
+const db = new sqlite3.Database(dbPath)
+*/
+
 //Read Configurations
 const configs = new nconf.Provider({
     env: true,
@@ -17,6 +24,14 @@ export interface IServerConfigurations {
     jwtSecret: string;
     jwtExpiration: string;
     routePrefix: string;
+}
+
+export interface IDataConfiguration {
+    connectionString: string;
+}
+
+export function getDatabaseConfig(): IDataConfiguration {
+    return configs.get("database");
 }
 
 export function getServerConfigs(): IServerConfigurations {

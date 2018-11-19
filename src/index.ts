@@ -1,5 +1,6 @@
 import * as Server from "./server";
 import * as Configs from "./configurations/index";
+import * as Database from "./database";
 
 console.log(`Running enviroment ${process.env.NODE_ENV || "dev"}`);
 
@@ -13,9 +14,9 @@ process.on("unhandledRejection", (reason: any) => {
     console.error(`unhandledRejection ${reason}`);
 });
 
-const start = async ({ config }) => {
+const start = async ({ config, db }) => {
     try {
-        const server = await Server.init(config);
+        const server = await Server.init(config, db);
         await server.start();
         console.log("Server running at:", server.info.uri);
 
@@ -24,6 +25,12 @@ const start = async ({ config }) => {
         throw err;
     }
 };
+
+// Init Database
+const dbConfigs = Configs.getDatabaseConfig();
+const database = Database.init(dbConfigs);
+
+// Starting Application Server
 const serverConfigs = Configs.getServerConfigs();
 // Start the server
-start({ config: serverConfigs});
+start({ config: serverConfigs, db: database });

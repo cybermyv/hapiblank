@@ -18,6 +18,10 @@ const register = async (server: Hapi.Server): Promise<void> => {
             {
               name: "temp",
               description: "Api temp interface."
+            },
+            {
+              name: "user",
+              description: "Api users interface."
             }
           ],
           swaggerUI: true,
