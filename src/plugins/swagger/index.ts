@@ -10,7 +10,7 @@ const register = async (server: Hapi.Server): Promise<void> => {
         plugin: require("hapi-swagger"),
         options: {
           info: {
-            title: "Temp Api",
+            title: "Blank Api",
             description: "Temp Api Documentation",
             version: "1.0"
           },
@@ -18,6 +18,11 @@ const register = async (server: Hapi.Server): Promise<void> => {
             {
               name: "temp",
               description: "Api temp interface."
+            },
+            {
+              name: "user",
+              description: "Api user interface."
+
             }
           ],
           swaggerUI: true,

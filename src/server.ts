@@ -5,6 +5,7 @@ import { IPlugin } from './plugins/interfaces';
 
 
 import * as Temp from "./api/Temp";
+import * as User from "./api/Users";
 
 
 export async function init(configs: IServerConfigurations): Promise<Hapi.Server> {
@@ -49,6 +50,7 @@ export async function init(configs: IServerConfigurations): Promise<Hapi.Server>
 
         console.log("Register Routes");
         Temp.init(server, configs);
+        User.init(server, configs);
 
         return server;
 
