@@ -3,12 +3,10 @@ import * as Boom from "boom";
 import { IPlugin } from './plugins/interfaces';
 import { IServerConfigurations } from "./configurations";
 import * as Temp from "./api/Temp";
-import * as User from "./api/User";
 
-import { IDataBase } from "./database";
+import * as User from "./api/Users";
 
-
-export async function init(configs: IServerConfigurations, database: IDataBase): Promise<Hapi.Server> {
+export async function init(configs: IServerConfigurations): Promise<Hapi.Server> {
     try {
         const port = process.env.PORT || configs.port;
 
@@ -31,7 +29,6 @@ export async function init(configs: IServerConfigurations, database: IDataBase):
         const plugins: Array<string> = configs.plugins;
 
         const pluginOptions = {
-            database: database,
             serverConfigs: configs
         };
 
@@ -52,8 +49,9 @@ export async function init(configs: IServerConfigurations, database: IDataBase):
 
         console.log("Register Routes");
 
-        Temp.init(server, configs, database);
-        User.init(server, configs, database);
+        Temp.init(server, configs);
+        User.init(server, configs);
+
 
         return server;
 

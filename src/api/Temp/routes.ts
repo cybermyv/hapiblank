@@ -14,9 +14,8 @@ export default function (
     database: IDataBase
 
 ) {
-    const tempController = new TempController(configs, database);
+    const tempController = new TempController(configs);
     server.bind(tempController);
-
     server.route({
         method: "GET",
         path: "/temp",

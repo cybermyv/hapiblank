@@ -1,32 +1,22 @@
-import * as sqlite3 from 'sqlite3';
-import { IDataConfiguration } from "./configurations";
-import { ITemp, TempModel } from './api/Temp/temp-model';
-import { IUser, UserModel } from './api/User/user-model';
+import "reflect-metadata";
+import { createConnection, ConnectionOptions, Connection, Repository  } from "typeorm";
+import User from './api/Users/user-model';
+import * as path from "path";
 
 
-
-export interface IDataBase {
-    // tempModel: {};
-    // userModel: {};
-    db: any;
-}
-
-export function init(config: IDataConfiguration): IDataBase {
-    sqlite3.verbose();
-
-    const db = new sqlite3.Database(config.connectionString, (err) => {
-        if (err) {
-            console.log("Ошибка подключения к базе данных", err);
-        } else {
-            console.log('База данных подключена');
-        }
-    });
-
-
-    return {
-        db
+export default class Store {
+    private static _conn: Connection;
+    public static connectionOptions: ConnectionOptions = {
+        type: 'sqlite',
+        database: path.join(__dirname, 'dbase/mrdb.db'),
+        entities: [User],
+        synchronize: true
     };
 
-
+    public static async createConnection() {
+        if (!this._conn) {
+            this._conn = await createConnection(this.connectionOptions);
+        }
+        return this._conn;
+    }
 }
-

@@ -5,7 +5,11 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
-    "typeRoots": ["node_modules/@types"]
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
   "include": [
     "src/**/**.ts",
