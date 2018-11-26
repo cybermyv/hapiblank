@@ -1,4 +1,7 @@
 {
+  "database":{
+    "connectionString":"./db/mrdb.db"
+  },
   "server": {
     "port": 5000,
     "jwtSecret": "random-secret-password",
