@@ -4,6 +4,9 @@
     "jwtSecret": "random-secret-password",
     "jwtExpiration": "1h",
     "routePrefix": "",
-    "plugins": [ "swagger" ]
+    "plugins": [
+      "jwt-auth",
+      "swagger"
+    ]
   }
 }

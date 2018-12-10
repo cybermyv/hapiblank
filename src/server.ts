@@ -29,9 +29,7 @@ export async function init(configs: IServerConfigurations): Promise<Hapi.Server>
         //-- Подключаем плагины
 
         const plugins: Array<string> = configs.plugins;
-        const pluginOptions = {
-            serverConfigs: configs
-        };
+        const pluginOptions = {serverConfigs: configs };
 
         let pluginPromises: Promise<any>[] = [];
 
@@ -40,8 +38,8 @@ export async function init(configs: IServerConfigurations): Promise<Hapi.Server>
             console.log(
                 `Register Plugin ${plugin.info().name} v${plugin.info().version}`
             );
-            // pluginPromises.push(plugin.register(server, pluginOptions));
-            pluginPromises.push(plugin.register(server));
+            pluginPromises.push(plugin.register(server, pluginOptions));
+            // pluginPromises.push(plugin.register(server));
         });
 
         await Promise.all(pluginPromises);

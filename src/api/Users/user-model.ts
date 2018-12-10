@@ -1,14 +1,3 @@
-// export interface IUser {
-//     id: number;
-//     login: string;
-//     password: string;
-//     nodelink: number;
-// }
-
-// let _UserModel: any = {};
-
-// export const UserModel: IUser = _UserModel;
-
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 export interface IUser {
@@ -21,6 +10,7 @@ export interface IUser {
 
 @Entity()
 export default class User implements IUser {
+
     @PrimaryGeneratedColumn()
     id: number;
 

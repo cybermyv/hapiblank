@@ -12,8 +12,14 @@ const configs = new nconf.Provider({
 });
 
 export interface IServerConfigurations {
+    // port: number;
+    // plugins: Array<string>;
+    // jwtSecret: string;
+    // jwtExpiration: string;
+    // routePrefix: string;
     port: number;
     plugins: Array<string>;
+    routes: Array<string>;
     jwtSecret: string;
     jwtExpiration: string;
     routePrefix: string;
