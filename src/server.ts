@@ -8,7 +8,7 @@ import * as Temp from "./api/Temp";
 import * as User from "./api/Users";
 
 
-export async function init(configs: IServerConfigurations): Promise<Hapi.Server> {
+export   const init = async (configs: IServerConfigurations): Promise<Hapi.Server> => {
     try {
         const port = process.env.PORT || configs.port;
 
@@ -58,4 +58,4 @@ export async function init(configs: IServerConfigurations): Promise<Hapi.Server>
         console.log("Error starting server: ", err);
         throw err;
     }
-}
+};

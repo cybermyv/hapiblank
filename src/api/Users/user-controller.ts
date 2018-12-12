@@ -18,12 +18,8 @@ export interface IUserList {
 
 
 export default class UserController {
-    private configs: IServerConfigurations;
 
-    constructor(configs: IServerConfigurations) {
-        this.configs = configs;
-    }
-
+    constructor(private configs: IServerConfigurations) {}
 
     public async getAllUser(request: Hapi.Request, h: Hapi.ResponseToolkit) {
         let conn = await Store.createConnection();
@@ -59,7 +55,7 @@ export default class UserController {
     }
 
     public async getUserById(request: Hapi.Request, h: Hapi.ResponseToolkit) {
-        let _id = request.params['id'];
+        let _id = request.params.id;
 
         let conn = await Store.createConnection();
         if (conn) {
@@ -75,7 +71,7 @@ export default class UserController {
     }
 
     public async updateUser(request: Hapi.Request, h: Hapi.ResponseToolkit) {
-        let _id = request.params['id'];
+        let _id = request.params.id;
 
         let updatedUser: IUser = <IUser>request.payload;
 
@@ -93,7 +89,7 @@ export default class UserController {
     }
 
     public async deleteUser(request: Hapi.Request, h: Hapi.ResponseToolkit) {
-        let _id = request.params['id'];
+        let _id = request.params.id;
 
         let conn = await Store.createConnection();
         if (conn) {

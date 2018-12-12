@@ -10,11 +10,11 @@ import * as UserValidator from './user-vlidator';
 
 
 
-export default function (
+export default  (
     server: Hapi.Server,
     configs: IServerConfigurations,
 
-) {
+) => {
 
 
     const userController = new UserController(configs);
@@ -154,4 +154,4 @@ export default function (
         }
     });
 
-}
+};

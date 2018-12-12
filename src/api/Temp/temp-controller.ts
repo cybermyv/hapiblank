@@ -6,15 +6,12 @@ import { ITemp } from './temp-model';
 import { IServerConfigurations } from './../../configurations/index';
 
 export default class TempController {
-    private configs: IServerConfigurations;
+   // private configs: IServerConfigurations;
     // private database: IDataBase;
 
-    constructor(configs: IServerConfigurations
+    constructor(private configs: IServerConfigurations
         // , database: IDataBase
-        ) {
-        // this.database = database;
-        this.configs = configs;
-    }
+        ) {}
 
     public createTemp(request: Hapi.Request, h: Hapi.ResponseToolkit) {
         let newTemp: ITemp = <ITemp>request.payload;

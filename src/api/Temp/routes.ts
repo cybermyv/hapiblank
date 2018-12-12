@@ -7,11 +7,11 @@ import * as TempValidator from "./temp-validator";
 import TempController from "./temp-controller";
 
 
-export default function (
+export default  (
     server: Hapi.Server,
     configs: IServerConfigurations,
 
-) {
+) => {
 
     const tempController = new TempController(configs);
     server.bind(tempController);
@@ -71,4 +71,4 @@ export default function (
         }
 
     });
-}
+};
