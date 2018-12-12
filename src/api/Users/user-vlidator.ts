@@ -12,3 +12,10 @@ export const updateUserModel = Joi.object().keys({
     password: Joi.string().required().default('111'),
     nodelink: Joi.number().required().default('1')
 });
+
+export const loginUserModel = Joi.object().keys({
+    login: Joi.string().trim().required(),
+    password: Joi.string().trim().required()
+});
+
+export const jwtValidator = Joi.object({'authorization': Joi.string().required()}).unknown();

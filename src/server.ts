@@ -3,7 +3,6 @@ import * as Boom from "boom";
 import { IServerConfigurations } from "./configurations";
 import { IPlugin } from './plugins/interfaces';
 
-
 import * as Temp from "./api/Temp";
 import * as User from "./api/Users";
 
@@ -29,9 +28,7 @@ export   const init = async (configs: IServerConfigurations): Promise<Hapi.Serve
         //-- Подключаем плагины
 
         const plugins: Array<string> = configs.plugins;
-        const pluginOptions = {
-            serverConfigs: configs
-        };
+        const pluginOptions = {serverConfigs: configs };
 
         let pluginPromises: Promise<any>[] = [];
 
@@ -40,8 +37,8 @@ export   const init = async (configs: IServerConfigurations): Promise<Hapi.Serve
             console.log(
                 `Register Plugin ${plugin.info().name} v${plugin.info().version}`
             );
-            // pluginPromises.push(plugin.register(server, pluginOptions));
-            pluginPromises.push(plugin.register(server));
+            pluginPromises.push(plugin.register(server, pluginOptions));
+            // pluginPromises.push(plugin.register(server));
         });
 
         await Promise.all(pluginPromises);
