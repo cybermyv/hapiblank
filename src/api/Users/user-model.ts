@@ -1,14 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+// import * as Bcrypt from "bcryptjs";
 
 export interface IUser {
     id: number;
     login: string;
     password: string;
     nodelink?: number;
-
+    // validatePassword(requestPassword: string): boolean;
 }
 
-@Entity()
+@Entity('user')
 export default class User implements IUser {
 
     @PrimaryGeneratedColumn()
@@ -22,4 +23,10 @@ export default class User implements IUser {
 
     @Column()
     nodelink: number;
+
+//    validatePassword (requestPassword: string): boolean {
+//         return Bcrypt.compareSync(requestPassword, this.password);
+//     }
+
 }
+

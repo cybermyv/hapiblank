@@ -1,32 +1,62 @@
 import * as Hapi from "hapi";
 import * as Boom from "boom";
 import * as uuid from "uuid";
+import * as Jwt from "jsonwebtoken";
 import { IServerConfigurations } from './../../configurations/index';
+import { Connection, Repository, getRepository, Entity } from 'typeorm';
+import { IRequest, ILoginRequest } from './../../interfaces/request';
 
 import Store from "../../database";
-
 import { IUser } from './user-model';
 import User from "./user-model";
-
-import { Connection, Repository, getRepository, Entity } from 'typeorm';
-
-
 
 export interface IUserList {
     users: User[];
 }
 
-
 export default class UserController {
-    private configs: IServerConfigurations;
+    constructor(private configs: IServerConfigurations) {
+    }
 
-    constructor(configs: IServerConfigurations) {
-        this.configs = configs;
+    private generateToken(user: IUser) {
+        const jwtSecret = this.configs.jwtSecret;
+        const jwtExpiration = this.configs.jwtExpiration;
+        const payload = { id: user.id };
+
+        return Jwt.sign(payload, jwtSecret, { expiresIn: jwtExpiration });
+    }
+
+    public async loginUser(request: ILoginRequest, h: Hapi.ResponseToolkit) {
+        const { login, password } = request.payload;
+
+
+        let conn = await Store.createConnection();
+
+        if (conn) {
+
+
+            let user: IUser = await conn.query('select * from user where login=?', [login]);
+            // return h.response(user).code(200);
+
+
+            console.log('Pass - ', password);
+
+            if (!user) { return Boom.unauthorized('Пользователь не найден'); }
+
+            console.log('Return - ', user);
+
+            // if (!user.validatePassword(password)) { return Boom.unauthorized("Неверный пароль"); }
+
+            return { token: this.generateToken(user) };
+
+        }
     }
 
 
     public async getAllUser(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+
         let conn = await Store.createConnection();
+
         if (conn) {
             try {
                 const results: User[] = await conn.query('select * from user');

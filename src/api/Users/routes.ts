@@ -3,7 +3,6 @@ import * as Joi from "joi";
 import * as Boom from "boom";
 
 import { IServerConfigurations } from "../../configurations";
-
 import UserController from './user-controller';
 import * as UserValidator from './user-vlidator';
 
@@ -15,19 +14,20 @@ export default function (
     configs: IServerConfigurations,
 
 ) {
-
-
     const userController = new UserController(configs);
     server.bind(userController);
-
 
     server.route({
         method: "GET",
         path: "/user",
         options: {
             handler: userController.getAllUser,
+            auth: "jwt",
             tags: ['api', 'user'],
             description: "Show all users.",
+            validate: {
+                headers: UserValidator.jwtValidator
+            },
             plugins: {
                 "hapi-swagger": {
                     responses: {
@@ -151,6 +151,29 @@ export default function (
                 }
             }
 
+        }
+    });
+
+    server.route({
+        method: 'POST',
+        path:'/login',
+        options:{
+            handler: userController.loginUser,
+            auth: false,
+            tags: ['api', 'user'],
+            description:'Login a user',
+            validate:{
+                payload: UserValidator.loginUserModel
+            },
+            plugins:{
+                'hapi-swagger':{
+                    responses:{
+                        '200': {
+                            description: 'User logged in !'
+                        }
+                    }
+                }
+            }
         }
     });
 
