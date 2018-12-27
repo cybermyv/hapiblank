@@ -24,9 +24,9 @@ export default class User implements IUser {
     @Column()
     nodelink: number;
 
-//    validatePassword (requestPassword: string): boolean {
-//         return Bcrypt.compareSync(requestPassword, this.password);
-//     }
+    // validatePassword (requestPassword: string): boolean {
+    //     return Bcrypt.compareSync(requestPassword, this.password);
+    // }
 
 }
 

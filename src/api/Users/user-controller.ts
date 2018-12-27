@@ -8,10 +8,10 @@ import { IRequest, ILoginRequest } from './../../interfaces/request';
 
 import Store from "../../database";
 import { IUser } from './user-model';
-import User from "./user-model";
+import User from './user-model';
 
 export interface IUserList {
-    users: User[];
+	users: User[];
 }
 
 export default class UserController {
