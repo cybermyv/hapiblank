@@ -49,9 +49,11 @@ export default function (
         path: "/user/{id}",
         options: {
             handler: userController.getUserById,
+            auth: "jwt",
             tags: ['api', 'user'],
             description: "Get task by id.",
             validate: {
+                headers: UserValidator.jwtValidator,
                 params: {
                     id: Joi.string().required()
                 }
@@ -77,10 +79,11 @@ export default function (
         path: '/user',
         options: {
             handler: userController.createUser,
+            auth: false,
             tags: ['api', 'user'],
             description: 'Create new User into db',
             validate: {
-                payload: UserValidator.createUserModel
+               payload: UserValidator.createUserModel
             },
             plugins: {
                 "hapi-swagger": {
@@ -102,9 +105,11 @@ export default function (
         path: '/user/{id}',
         options: {
             handler: userController.updateUser,
+            auth: "jwt",
             tags: ['api', 'user'],
             description: 'Update user by id',
             validate: {
+                headers: UserValidator.jwtValidator,
                 params: {
                     id: Joi.string().required()
                 },
@@ -131,9 +136,11 @@ export default function (
         path: '/user/{id}',
         options: {
             handler: userController.deleteUser,
+            auth: "jwt",
             tags: ['api', 'user'],
             description: 'Delete user by id',
             validate: {
+                headers: UserValidator.jwtValidator,
                 params: {
                     id: Joi.string().required()
                 }
