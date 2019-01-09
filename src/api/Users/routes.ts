@@ -6,9 +6,6 @@ import { IServerConfigurations } from "../../configurations";
 import UserController from './user-controller';
 import * as UserValidator from './user-vlidator';
 
-
-
-
 export default function (
     server: Hapi.Server,
     configs: IServerConfigurations,
@@ -167,7 +164,7 @@ export default function (
         options:{
             handler: userController.loginUser,
             auth: false,
-            tags: ['api', 'user'],
+            tags: ['api', 'login'],
             description:'Login a user',
             validate:{
                 payload: UserValidator.loginUserModel
