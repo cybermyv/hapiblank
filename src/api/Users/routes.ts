@@ -16,7 +16,7 @@ export default function (
 
     server.route({
         method: "GET",
-        path: "/user",
+        path: "/api/v1/user",
         options: {
             handler: userController.getAllUser,
             auth: "jwt",
@@ -43,7 +43,7 @@ export default function (
 
     server.route({
         method: "GET",
-        path: "/user/{id}",
+        path: "/api/v1/user/{id}",
         options: {
             handler: userController.getUserById,
             auth: "jwt",
@@ -73,7 +73,7 @@ export default function (
 
     server.route({
         method: 'POST',
-        path: '/user',
+        path: '/api/v1/user',
         options: {
             handler: userController.createUser,
             auth: false,
@@ -99,7 +99,7 @@ export default function (
 
     server.route({
         method: 'PUT',
-        path: '/user/{id}',
+        path: '/api/v1/user/{id}',
         options: {
             handler: userController.updateUser,
             auth: "jwt",
@@ -130,7 +130,7 @@ export default function (
 
     server.route({
         method: 'DELETE',
-        path: '/user/{id}',
+        path: '/api/v1/user/{id}',
         options: {
             handler: userController.deleteUser,
             auth: "jwt",
@@ -160,7 +160,7 @@ export default function (
 
     server.route({
         method: 'POST',
-        path:'/login',
+        path:'/api/v1/login',
         options:{
             handler: userController.loginUser,
             auth: false,
