@@ -14,7 +14,12 @@ const register = async (server: Hapi.Server): Promise<void> => {
             description: "Temp Api Documentation",
             version: "1.0"
           },
+          grouping: 'tags',
           tags: [
+            {
+              name: "persona",
+              description: "Api persona interface."
+            },
             {
               name: "temp",
               description: "Api temp interface."
@@ -22,13 +27,12 @@ const register = async (server: Hapi.Server): Promise<void> => {
             {
               name: "user",
               description: "Api user interface."
-
             },
             {
               name: "login",
               description: "Api login interface."
-
             }
+
           ],
           swaggerUI: true,
           documentationPage: true,

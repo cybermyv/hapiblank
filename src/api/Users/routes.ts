@@ -20,13 +20,14 @@ export default function (
         options: {
             handler: userController.getAllUser,
             auth: "jwt",
-            tags: ['api', 'user'],
+            tags: ["api", "user"],
             description: "Show all users.",
             validate: {
                 headers: UserValidator.jwtValidator
             },
             plugins: {
                 "hapi-swagger": {
+                    order: 2,
                     responses: {
                         "200": {
                             description: "All users responses"
@@ -47,7 +48,7 @@ export default function (
         options: {
             handler: userController.getUserById,
             auth: "jwt",
-            tags: ['api', 'user'],
+            tags: ["api", "user"],
             description: "Get task by id.",
             validate: {
                 headers: UserValidator.jwtValidator,
@@ -57,6 +58,7 @@ export default function (
             },
             plugins: {
                 "hapi-swagger": {
+                    order: 2,
                     responses: {
                         "200": {
                             description: "Users founded"
@@ -77,10 +79,10 @@ export default function (
         options: {
             handler: userController.createUser,
             auth: false,
-            tags: ['api', 'user'],
+            tags: ["api", "user"],
             description: 'Create new User into db',
             validate: {
-               payload: UserValidator.createUserModel
+                payload: UserValidator.createUserModel
             },
             plugins: {
                 "hapi-swagger": {
@@ -103,7 +105,7 @@ export default function (
         options: {
             handler: userController.updateUser,
             auth: "jwt",
-            tags: ['api', 'user'],
+            tags: ["api", "user"],
             description: 'Update user by id',
             validate: {
                 headers: UserValidator.jwtValidator,
@@ -114,6 +116,7 @@ export default function (
             },
             plugins: {
                 "hapi-swagger": {
+                    order: 2,
                     responses: {
                         "200": {
                             description: "Update user"
@@ -134,7 +137,7 @@ export default function (
         options: {
             handler: userController.deleteUser,
             auth: "jwt",
-            tags: ['api', 'user'],
+            tags: ["api", "user"],
             description: 'Delete user by id',
             validate: {
                 headers: UserValidator.jwtValidator,
@@ -144,6 +147,7 @@ export default function (
             },
             plugins: {
                 "hapi-swagger": {
+                    order: 2,
                     responses: {
                         "200": {
                             description: "Delete user"
@@ -159,19 +163,20 @@ export default function (
     });
 
     server.route({
-        method: 'POST',
-        path:'/api/v1/login',
-        options:{
+        method: "POST",
+        path: "/api/v1/login",
+        options: {
             handler: userController.loginUser,
             auth: false,
-            tags: ['api', 'login'],
-            description:'Login a user',
-            validate:{
+            tags: ["api", "login"],
+            description: 'Login a user',
+            validate: {
                 payload: UserValidator.loginUserModel
             },
-            plugins:{
-                'hapi-swagger':{
-                    responses:{
+            plugins: {
+                'hapi-swagger': {
+                    order: 1,
+                    responses: {
                         '200': {
                             description: 'User logged in !'
                         }

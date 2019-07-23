@@ -5,7 +5,7 @@ import * as Jwt from "jsonwebtoken";
 import * as Bcrypt from "bcryptjs";
 
 import { IServerConfigurations } from './../../configurations/index';
-import { Connection, Repository, getRepository, Entity } from 'typeorm';
+// import { Connection, Repository, getRepository, Entity } from 'typeorm';
 import { IRequest, ILoginRequest } from './../../interfaces/request';
 
 import Store from "../../database";

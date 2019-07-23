@@ -1,7 +1,10 @@
 import 'reflect-metadata';
 import { createConnection, ConnectionOptions, Connection, Repository } from 'typeorm';
 import User from './api/Users/user-model';
+import Persona from './api/Persona/persona-model';
+
 import * as path from 'path';
+
 
 export default class Store {
 	private static _conn: Connection;
@@ -9,7 +12,7 @@ export default class Store {
 	public static connectionOptions: ConnectionOptions = {
 		type: 'sqlite',
 		database: path.join(__dirname, 'dbase/mrdb.db'),
-		entities: [ User ],
+		entities: [ User, Persona ],
 		synchronize: true
 	};
 
